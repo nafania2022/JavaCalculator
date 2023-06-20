@@ -1,4 +1,3 @@
-import java.sql.Array;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -17,8 +16,8 @@ public class Main {
     }
 
     static int  calculator(String expression) throws Exception {
-        Pattern patternOperand = Pattern.compile("-?\\d+");
-        Matcher matcherOpernad = patternOperand.matcher(expression);
+        Pattern patternOperand = Pattern.compile("(-?\\d+|\\s\\d+)");
+        Matcher matcherOperand = patternOperand.matcher(expression);
         Pattern patternOperator = Pattern.compile("\\d[+\\-*/]");
         Matcher matcherOperator = patternOperator.matcher(expression);
         String operator = "";
@@ -29,18 +28,15 @@ public class Main {
             operator = String.valueOf(matcherOperator.group().charAt(1));
             count ++;
         }
-        if (count > 1 ){
-            throw new Exception("Cтрока не является математической операцией");
+        while (matcherOperand.find()){
+            operandStr.add(matcherOperand.group());
         }
-        while (matcherOpernad.find()){
-            operandStr.add(matcherOpernad.group());
-        }
-        if( operandStr.size() ==2 && operator.length() == 1) {
+
+        if( operandStr.size() ==2 && count == 1) {
             for (String o : operandStr) {
                 if (o.matches("^(-?[0-9]|-?1[0])$")) {
                     operandInt.add(Integer.parseInt(o));
-                }
-                else throw new Exception("Используйте только целые числа от 1-10");
+                } else throw new Exception("Используйте только целые числа от 1-10");
             }
             switch (operator){
                 case "+":
@@ -54,10 +50,8 @@ public class Main {
 
                 case ("*"):
                     return operandInt.get(0) * operandInt.get(1);
-
-            }
-        }else throw new Exception(" формат математической операции не удовлетворяет заданию - два\n" +
-                "операнда и один оператор (+, -, /, *)");
+                }
+        }else throw new Exception(" формат математической операции не удовлетворяет заданию - два операнда и один оператор (+, -, /, *)");
 
         return 0;
     }
