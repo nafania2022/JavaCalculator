@@ -16,7 +16,7 @@ public class Main {
     }
 
     static int  calculator(String expression) throws Exception {
-        Pattern patternOperand = Pattern.compile("(-?\\d+|\\s\\d+)");
+        Pattern patternOperand = Pattern.compile("(\\d+\\.\\d+|-?\\d+|\\s\\d+)");
         Matcher matcherOperand = patternOperand.matcher(expression);
         Pattern patternOperator = Pattern.compile("\\d[+\\-*/]");
         Matcher matcherOperator = patternOperator.matcher(expression);
