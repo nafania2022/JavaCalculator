@@ -34,9 +34,9 @@ public class Main {
 
         if( operandStr.size() ==2 && count == 1) {
             for (String o : operandStr) {
-                if (o.matches("^(-?[0-9]|-?1[0])$")) {
+                if (o.matches("^(-?[1-9]|-?1[0]|0)$")) {
                     operandInt.add(Integer.parseInt(o));
-                } else throw new Exception("Используйте только целые числа от 1-10");
+                } else throw new Exception("Используйте только целые числа от 0-10");
             }
             switch (operator){
                 case "+":
