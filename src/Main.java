@@ -6,10 +6,10 @@ import java.util.regex.Pattern;
 
 public class Main {
     public static void main(String[] args) {
-//        Scanner sc = new Scanner(System.in);
-//        String input = sc.next();
+        Scanner sc = new Scanner(System.in);
+        String input = sc.next();
         try {
-            System.out.println(calculator("-1--2"));
+            System.out.println(calculator(input));
         }catch (Exception e){
             System.out.println(e);
         }
