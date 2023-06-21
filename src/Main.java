@@ -6,17 +6,17 @@ import java.util.regex.Pattern;
 
 public class Main {
     public static void main(String[] args) {
-        Scanner sc = new Scanner(System.in);
-        String input = sc.next();
+//        Scanner sc = new Scanner(System.in);
+//        String input = sc.next();
         try {
-            System.out.println(calculator(input));
+            System.out.println(calculator("-1--2"));
         }catch (Exception e){
             System.out.println(e);
         }
     }
 
     static int  calculator(String expression) throws Exception {
-        Pattern patternOperand = Pattern.compile("(\\d+\\.\\d+|-?\\d+|\\s\\d+)");
+        Pattern patternOperand = Pattern.compile("(^-?\\d+\\.?\\d?+|-{2}\\d+\\.?\\d?+|\\d+\\.?\\d?+|\\s\\d+\\.?\\d?+)");
         Matcher matcherOperand = patternOperand.matcher(expression);
         Pattern patternOperator = Pattern.compile("\\d[+\\-*/]");
         Matcher matcherOperator = patternOperator.matcher(expression);
@@ -34,9 +34,9 @@ public class Main {
 
         if( operandStr.size() ==2 && count == 1) {
             for (String o : operandStr) {
-                if (o.matches("^(-?[1-9]|-?1[0]|0)$")) {
-                    operandInt.add(Integer.parseInt(o));
-                } else throw new Exception("Используйте только целые числа от 0-10");
+                if (o.matches("^(-{0,2}[1-9]|-{0,2}1[0])$")) {
+                    operandInt.add(Integer.parseInt(o.replaceAll("--", "-")));
+                } else throw new Exception("Используйте только целые числа от 1-10");
             }
             switch (operator){
                 case "+":
